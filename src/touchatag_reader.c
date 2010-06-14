@@ -482,8 +482,8 @@ touchatag_reader_led_blink_all_readers (libusb_t *libusb, reader_t *reader)
 	int recvb;
 	for (target = 0; target < libusb->dev_number; target++){
 		if ((recvb = touchatag_command (libusb, touchatag_blinking, sizeof (touchatag_blinking), reader, sizeof (reader->recvbuf), target)) < 0) {
-			printf("Error touchatag_blink_all ()\n");
-			exit (EXIT_FAILURE);
+			printf("Error touchatag_reader_led_blink_all_readers ()\n");
+			return;
 		}
 	}
 }

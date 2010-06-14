@@ -17,7 +17,7 @@ int main() {
 	printf (" main_reader_info\n");
 	printf (" ****************\n\n");
 	
-	printf (" detect readers and print info using lib-touchatag-1.0\n\n");
+	printf (" detect all the readers and print info using lib-touchatag-1.0\n\n");
 	
 	if ((numofdev = touchatag_scan_bus (libusb)) != 0) {
 		

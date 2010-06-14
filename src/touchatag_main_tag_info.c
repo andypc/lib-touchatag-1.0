@@ -17,7 +17,7 @@ int main() {
 	printf ("\n ****************\n");
 	printf (" main_polling_all\n");
 	printf (" ****************\n\n");
-	printf (" detect all the readers and look for tags (UID and data) using lib-touchatag-1.0\n\n");
+	printf (" look for readers and tags (UID and data) using lib-touchatag-1.0\n\n");
 	
 	if ((numofdev = touchatag_scan_bus (libusb)) != 0) {
 		
@@ -72,6 +72,12 @@ int main() {
 			}
 			
 			printf (" Tag ASCII DATA: %s\n\n", (char *) touchatag_tag_return_ascii_data_mem (&tag[0]));
+touchatag_tag_print_otps (&tag[0]);
+printf ("\n");
+touchatag_tag_print_hex_lbytes (&tag[0]);
+printf ("\n");
+touchatag_tag_print_ascii_lbytes (&tag[0]);
+printf ("\n");
 		}
 		
 		else if (numtags == 2) {
