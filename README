@@ -10,11 +10,13 @@ You have to run it with the "sudo" prefix (in order to comunicate with the usb i
 Available samples
 *****************
 
-- main_info_reader: detects all the reader connected and prints out all the available info.
+- main_reader_info: detects all the readers connected and prints out all the available info.
 
-- main_polling_all: look for readers and tags, printing reader ID, detected tag UID and DATA.
+- main_reader_blink: detects all the readers connected and blinks their leds.
 
-Run them as: "sudo ./main_info_reader" or "sudo ./main_polling_all".
+- main_polling_all: detects all the readers and looks for tags, printing reader ID, tag UID and DATA.
+
+Run them as: "sudo ./main_reader_info",  "sudo ./main_reader_blink" or "sudo ./main_polling_all".
 
 
 
