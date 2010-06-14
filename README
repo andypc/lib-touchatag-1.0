@@ -14,7 +14,7 @@ Available samples
 
 - main_polling_all: look for readers and tags, printing reader ID, detected tag UID and DATA.
 
-run them as: "sudo ./main_info_reader" or "sudo ./main_polling_all".
+Run them as: "sudo ./main_info_reader" or "sudo ./main_polling_all".
 
 
 
