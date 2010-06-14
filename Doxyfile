@@ -5,7 +5,7 @@
 #
 # All text after a hash (#) is considered a comment and will be ignored
 # The format is:
-#       TAG = value [value, ...]
+#       TAG = value [value, ...]  
 # For lists items can also be appended using:
 #       TAG += value [value, ...]
 # Values that contain spaces should be placed between quotes (" ")
