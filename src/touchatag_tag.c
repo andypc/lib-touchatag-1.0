@@ -82,7 +82,7 @@ char
 {
 	char *string;
 	char a[10];
-	int i, z;
+	int i, z, j;
 
 	string = (char *) malloc (48 * 2);
 	
@@ -92,9 +92,10 @@ char
 		string[2*i+1] = a[z-1];
 	}
 	string[2*i] = '\0';
-
+	
 	return strdup (string);
 }
+
 
 /*
  Prints tag ASCII DATA (all the memory)

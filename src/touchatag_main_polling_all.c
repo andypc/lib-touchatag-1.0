@@ -38,12 +38,39 @@ int main() {
 		
 		/* Look for tags, get ID and DATA */
 		numtags = touchatag_reader_polling_all_readers (libusb, reader, tag);
-
-		printf ("\n");
 		
 		if (numtags == 1) {
-			printf (" Tag UID:        %s\n", (char *) touchatag_tag_return_tag_uid (&tag[0]));
-			printf (" Tag HEX DATA:   %s\n", (char *) touchatag_tag_return_hex_data_mem (&tag[0]));
+			char *string;
+			char *string_new;
+			int z = 0, j;
+			string_new = (char *) malloc (22);
+			
+			printf ("\n Tag UID:        %s\n", (char *) touchatag_tag_return_tag_uid (&tag[0]));
+
+			/* Get hex data */
+			string = touchatag_tag_return_hex_data_mem (&tag[0]);
+
+			/* Data fix */
+			for (j = 0; j < 6; j++) {
+				for (i = 0; i < 16; i++) {
+					/* Create space */
+					if ((i != 0) && (i % 2 == 0)) {
+						string_new[z++] = ' ';
+					}
+
+					string_new[z] = string[j*16+i];
+					z++;
+				}
+				string_new[z++] = '\0';
+
+				if (j == 0)
+					printf (" Tag HEX DATA:   %s\n", string_new);
+				else
+					printf ("                 %s\n", string_new);
+				
+				z = 0;
+			}
+			
 			printf (" Tag ASCII DATA: %s\n\n", (char *) touchatag_tag_return_ascii_data_mem (&tag[0]));
 		}
 		
