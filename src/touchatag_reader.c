@@ -206,8 +206,6 @@ touchatag_reader_polling_target_reader (libusb_t *libusb,reader_t *reader, tag_t
 	char get2 = {0x21};
 	
 	int target = touchatag_reader_link_id_reader_usb_handler (libusb, reader, ID);
-
-	printf ("Polling on reader: %s (target %d)\n", ID, target);
 	
 	while ( t < (touchatag_seektime/(touchatag_looprate + 90))){
 			
@@ -482,8 +480,8 @@ touchatag_reader_led_blink_all_readers (libusb_t *libusb, reader_t *reader)
 	int recvb;
 	for (target = 0; target < libusb->dev_number; target++){
 		if ((recvb = touchatag_command (libusb, touchatag_blinking, sizeof (touchatag_blinking), reader, sizeof (reader->recvbuf), target)) < 0) {
-			printf("Error touchatag_reader_led_blink_all_readers ()\n");
-			return;
+			printf("Error touchatag_blink_all ()\n");
+			exit (EXIT_FAILURE);
 		}
 	}
 }

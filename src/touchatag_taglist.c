@@ -30,8 +30,6 @@
 #define MAX_LENGHT_ACTION 48
 #define MAX_ARGS 5
 
-sqlite3_stmt *pStmt;   
-sqlite3 *database;
 char *zErr;
 char dbname[] = "touchatag_db";
 const unsigned char *res;
@@ -45,9 +43,11 @@ char data[97];
  To use at the beginning just one time
 */
 int
-touchatag_taglist_sqlite3_init()
+touchatag_taglist_sqlite3_init ()
 {	
+	sqlite3 *database;
 	int rc;
+	
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
 		return -1;
@@ -58,7 +58,7 @@ touchatag_taglist_sqlite3_init()
 		return -1;
 	}
 
-	sqlite3_close(database);
+	sqlite3_close (database);
 	return 0;
 }
 
@@ -72,7 +72,14 @@ touchatag_taglist_sqlite3_init()
 int
 touchatag_taglist_sqlite3_search (tag_t *tag)
 {	
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, i = 0, b;
+
+	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
+		printf ("Error sqlite3_open ()\n");
+		return -1;
+	}
 	
 	touchatag_sconvert (tag, uid, data);
 
@@ -97,10 +104,59 @@ touchatag_taglist_sqlite3_search (tag_t *tag)
 		return 0;
 	}
 
-	i=sqlite3_clear_bindings(pStmt);
+	i=sqlite3_clear_bindings (pStmt);
 	
-	if ((rc = sqlite3_reset(pStmt))!= SQLITE_OK){
+	if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
 		printf("Error sqlite3_reset () in touchatag_taglist_sqlite3_search\n");
+		return -1;
+	}
+	return 1;
+}
+
+
+/* 
+ Looks in the db for the tag ID (given)
+ Returns 1 if it finds the tag UID in the db
+ Returns 0 if it doesn't find the tag in the db
+ Returns -1 if there is an error
+*/
+int
+touchatag_taglist_sqlite3_search_from_uid (char *tag_uid)
+{	
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
+	int rc, i = 0, b;
+
+	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
+		printf ("Error sqlite3_open ()\n");
+		return -1;
+	}
+
+	if ((rc = sqlite3_prepare_v2 (database, "SELECT * FROM tag WHERE UID=?", -1, &pStmt, NULL)) != SQLITE_OK){
+		printf("Error prepare_v2 #1 search\n");
+		return -1;
+	}
+
+	if ((rc = sqlite3_bind_text (pStmt, 1, tag_uid, -1, NULL)) != SQLITE_OK){
+		printf ("Error sqlite3_bind_text () in touchatag_taglist_sqlite3_search\n");
+		return -1;
+	}
+	
+	if ((rc = sqlite3_step (pStmt)) != SQLITE_ROW){
+
+		i = sqlite3_clear_bindings (pStmt);
+
+		if ((rc = sqlite3_reset (pStmt)) != SQLITE_OK){
+			printf ("Error sqlite3_reset () in touchatag_taglist_sqlite3_search\n");
+			return -1;
+		}
+		return 0;
+	}
+
+	i=sqlite3_clear_bindings (pStmt);
+	
+	if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
+		printf ("Error sqlite3_reset () in touchatag_taglist_sqlite3_search\n");
 		return -1;
 	}
 	return 1;
@@ -115,18 +171,19 @@ touchatag_taglist_sqlite3_search (tag_t *tag)
 int
 touchatag_taglist_sqlite3_copy_action (tag_t *tag, char *ret)
 {	
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
 	uid[14] = '\0';
 	data[96] = '\0';
-	
-	touchatag_sconvert (tag, uid, data);
-	
+
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
-		sqlite3_close (database); 
 		return -1;
 	}
 	
+	touchatag_sconvert (tag, uid, data);
+		
 	if ((rf = touchatag_taglist_sqlite3_search (tag)) == -1){
 		printf ("Error touchatag_taglist_sqlite3_search ()\n");
 		sqlite3_close (database);
@@ -159,7 +216,7 @@ touchatag_taglist_sqlite3_copy_action (tag_t *tag, char *ret)
 		
 		res = sqlite3_column_text (pStmt, 2);                 
 		
-		sprintf (ret,"%s",res);
+		sprintf (ret, "%s", res);
 			
 		i = sqlite3_clear_bindings (pStmt);                            
 		
@@ -169,7 +226,7 @@ touchatag_taglist_sqlite3_copy_action (tag_t *tag, char *ret)
 			return -1;
 		}
 			
-		sqlite3_close(database); 
+		sqlite3_close (database); 
 		return 1;
 	}
 }
@@ -183,19 +240,20 @@ touchatag_taglist_sqlite3_copy_action (tag_t *tag, char *ret)
 int
 touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act)
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
 	char *pa = act;
 	
 	uid[14]='\0';
 	data[96]='\0';
-	
-	touchatag_sconvert (tag, uid, data);
-	
+
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
-		sqlite3_close (database);
 		return -1;
 	}
+	
+	touchatag_sconvert (tag, uid, data);
 	
 	if ((rf = touchatag_taglist_sqlite3_search (tag)) == -1){
 		printf("Error touchatag_taglist_sqlite3_search () in touchatag_taglist_sqlite3_action_update ()\n");
@@ -226,7 +284,7 @@ touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act)
 		}		
 	}
 	if (rf == 1) {
-		if ((rc = sqlite3_prepare_v2(database,"UPDATE tag SET ACTION=? WHERE UID=?", -1, &pStmt, NULL)) != SQLITE_OK){       
+		if ((rc = sqlite3_prepare_v2 (database,"UPDATE tag SET ACTION=? WHERE UID=?", -1, &pStmt, NULL)) != SQLITE_OK){       
 			printf("Error sqlite3_prepare_v2 () #2 in touchatag_taglist_sqlite3_action_update ()\n");
 			sqlite3_close(database);
 			return -1;
@@ -249,7 +307,7 @@ touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act)
 		return -1;
 	}
 	
-	i=sqlite3_clear_bindings(pStmt);                             
+	i=sqlite3_clear_bindings (pStmt);                             
 		
 	if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
 		printf("Error sqlite3_reset ()\n");
@@ -269,19 +327,21 @@ touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act)
 int
 touchatag_sqlite3_add (tag_t *tag, char *act)
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
-	char *pa = act;
-
+	char *pa = act;	
+	
 	uid[14]='\0';
 	data[96]='\0';
 
-	touchatag_sconvert (tag, uid, data);
-
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
-		sqlite3_close (database);
 		return -1;
 	}
+	
+	touchatag_sconvert (tag, uid, data);
+
 	if ((rf = touchatag_taglist_sqlite3_search (tag)) == -1){
 		printf ("Error touchatag_taglist_sqlite3_search ()\n");
 		sqlite3_close (database);
@@ -339,17 +399,20 @@ touchatag_sqlite3_add (tag_t *tag, char *act)
 int
 touchatag_taglist_sqlite3_update_counter_tag (tag_t *tag)
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
+	
 	uid[14] = '\0';
 	data[96] = '\0';
-	
-	touchatag_sconvert (tag, uid, data);
-	
+
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
-		printf ("Error sqlite3_open () in touchatag_taglist_sqlite3_update_counter_tag ()\n");
-		sqlite3_close (database);
+		printf ("Error sqlite3_open ()\n");
 		return -1;
 	}
+	
+	touchatag_sconvert (tag, uid, data);
+
 	if ((rf = touchatag_taglist_sqlite3_counter_tag (tag)) == -1){
 		printf ("Error touchatag_taglist_sqlite3_counter_tag () in touchatag_taglist_sqlite3_update_counter_tag ()\n");
 		sqlite3_close (database);
@@ -404,17 +467,19 @@ touchatag_taglist_sqlite3_update_counter_tag (tag_t *tag)
 int
 touchatag_taglist_sqlite3_counter_tag (tag_t *tag)
 {	
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0, id;
+	
 	uid[14] = '\0';
 	data[96] = '\0';
-	
-	touchatag_sconvert (tag, uid, data);
-	
+
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
-		sqlite3_close (database); 
 		return -1;
 	}
+	
+	touchatag_sconvert (tag, uid, data);
 	
 	if ((rf = touchatag_taglist_sqlite3_search (tag)) == -1){    
 		printf ("Errore touchatag_taglist_sqlite3_search () in touchatag_taglist_sqlite3_counter_tag ()\n");
@@ -469,18 +534,20 @@ touchatag_taglist_sqlite3_counter_tag (tag_t *tag)
 int
 touchatag_taglist_sqlite3_delete_tag (tag_t *tag)
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
 	const unsigned char *id;
+	
 	uid[14] = '\0';
 	data[96] = '\0';
-	
-	touchatag_sconvert (tag, uid, data);
-	
+
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
-		printf ("Error sqlite3_open () in touchatag_taglist_sqlite3_delete_tag ()\n");
-		sqlite3_close (database); 
+		printf ("Error sqlite3_open ()\n");
 		return -1;
 	}
+
+	touchatag_sconvert (tag, uid, data);
 	
 	if ((rf = touchatag_taglist_sqlite3_search (tag)) == -1){      
 		printf ("Errore touchatag_taglist_sqlite3_search () in touchatag_taglist_sqlite3_delete_tag ()\n");
@@ -525,6 +592,68 @@ touchatag_taglist_sqlite3_delete_tag (tag_t *tag)
 }
 
 
+/*
+ Deletes the given tag from the db
+ Returns 1 if it existed
+ Returns 0 if the tag in not in the db
+*/
+int
+touchatag_taglist_sqlite3_delete_tag_from_uid (char *tag_uid)
+{
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
+	int rc, rf, i = 0;
+	const unsigned char *id;
+	
+	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
+		printf ("Error sqlite3_open () in touchatag_taglist_sqlite3_delete_tag ()\n");
+		sqlite3_close (database); 
+		return -1;
+	}
+	
+	if ((rf = touchatag_taglist_sqlite3_search_from_uid (tag_uid)) == -1){      
+		printf ("Errore touchatag_taglist_sqlite3_search () in touchatag_taglist_sqlite3_delete_tag ()\n");
+		sqlite3_close (database);
+		return -1;
+	}
+	
+	if (rf == 0) {
+		sqlite3_close (database); 
+		return 0;
+	}
+		
+	if (rf == 1) {
+		if ((rc = sqlite3_prepare_v2 (database, "DELETE from tag WHERE UID=?", -1, &pStmt, NULL)) != SQLITE_OK){
+			printf ("Error sqlite3_prepare_v2 () in touchatag_taglist_sqlite3_delete_tag ()\n");
+			sqlite3_close (database); 
+			return -1;
+		}
+		
+		if ((rc = sqlite3_bind_text (pStmt, 1, tag_uid, -1, NULL)) != SQLITE_OK){
+			printf ("Error sqlite3_bind_text () in touchatag_taglist_sqlite3_delete_tag ()\n");
+			sqlite3_close (database); 
+			return -1;
+		}
+		
+		if ((rc = sqlite3_step (pStmt)) != SQLITE_DONE){
+			printf ("Error sqlite3_step () in touchatag_taglist_sqlite3_delete_tag ()\n");
+			return -1;
+		}
+		
+		i = sqlite3_clear_bindings (pStmt);
+				
+		if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
+			printf ("Error sqlite3_reset () in touchatag_taglist_sqlite3_delete_tag ()\n");
+			sqlite3_close (database);
+			return -1;
+		}
+			
+		sqlite3_close (database); 
+		return 1;
+	}
+}
+
+
 /* 
  Deletes everything in the database
  Returns 1 if everything is done
@@ -533,6 +662,8 @@ touchatag_taglist_sqlite3_delete_tag (tag_t *tag)
 int
 touchatag_taglist_sqlite3_reset_db ()
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int rc, rf, i = 0;
 	const unsigned char *id;
 
@@ -574,7 +705,8 @@ touchatag_taglist_sqlite3_reset_db ()
 */
 int
 touchatag_taglist_sqlite3_show_all ()
-{	
+{
+	sqlite3 *database;
 	char **result;
 	char *zErrMsg = 0;
 	int nrow;
@@ -594,13 +726,7 @@ touchatag_taglist_sqlite3_show_all ()
 	}
   	printf ("\n");
   	sqlite3_free_table (result);
-  
-	if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
-		printf ("Error sqlite3_reset in touchatag_taglist_sqlite3_show_all ()\n");
-		sqlite3_close (database);
-		return -1;
-	}
-		
+	
 	sqlite3_close(database); 
 	return 1;
 }
@@ -612,16 +738,17 @@ touchatag_taglist_sqlite3_show_all ()
 int
 touchatag_taglist_sqlite3_save_all (list_t *lists)
 {
+	sqlite3 *database;
 	char **result;
 	char *zErrMsg = 0;
 	char buff[250];
 	int nrow;
  	int ncol;
 	int i, rc, j, k = 0;
- 		
+	
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open () in touchatag_taglist_sqlite3_save_all ()\n");
-		sqlite3_close (database); 
+		sqlite3_close (database);
 		return -1;
 	}
 	
@@ -629,23 +756,85 @@ touchatag_taglist_sqlite3_save_all (list_t *lists)
 	
 	for (j = 1; j < nrow + 1; j++) {
 			sprintf (lists[k].uid, "%s", result[ncol*j]);
-			if (result[ncol*j+1] != NULL)
-				sprintf (lists[k].data,"%s",result[ncol*j+1]);
+//			if (result[ncol*j+1] != NULL)
+//				sprintf (lists[k].data,"%s",result[ncol*j+1]);
+		
 			sprintf (lists[k].action, "%s", result[ncol*j+2]);
-			lists[k].cont = *result[ncol*j+3];
-			lists[k].num = *result[ncol*j+4];
+			lists[k].cont = *result[ncol*j+3] - 48;
+			lists[k].num = *result[ncol*j+4] - 48;
 			k++;
 	}
 	
   	sqlite3_free_table (result);
-  
-	if ((rc = sqlite3_reset (pStmt))!= SQLITE_OK){
-		printf ("Error sqlite3_reset () in touchatag_taglist_sqlite3_save_all ()\n");
+
+	sqlite3_close (database);
+
+	return 1;
+}
+
+
+/* 
+ Returns tag counter value
+ Returns -2 it the tag is not in the db
+*/
+int
+touchatag_taglist_sqlite3_save_info_tag (char *tag_uid, list_t *list)
+{	
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
+	int rc, rf, i = 0, count;
+	
+	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
+		printf ("Error sqlite3_open ()\n");
+		sqlite3_close (database); 
+		return -1;
+	}
+	
+	if ((rf = touchatag_taglist_sqlite3_search_from_uid (tag_uid)) == -1){    
+		printf ("Errore touchatag_taglist_sqlite3_search () in touchatag_taglist_sqlite3_counter_tag ()\n");
 		sqlite3_close (database);
 		return -1;
 	}
+	
+	if (rf == 0) {
+		sqlite3_close (database); 
+		return -2;
+	}
 		
-	sqlite3_close(database);
+	if (rf == 1) {
+	
+		if ((rc = sqlite3_prepare_v2 (database, "SELECT * from tag WHERE UID=?", -1, &pStmt, NULL)) != SQLITE_OK){
+			printf ("Error sqlite3_prepare_v2 () in touchatag_taglist_sqlite3_counter_tag ()\n");
+			sqlite3_close (database); 
+			return -1;
+		}
+		
+		if ((rc = sqlite3_bind_text (pStmt, 1, tag_uid, -1, NULL)) != SQLITE_OK){
+			printf ("Error sqlite3_bind_text () in touchatag_taglist_sqlite3_counter_tag ()\n");
+			sqlite3_close (database); 
+			return -1;
+		}
+		
+		if ((rc = sqlite3_step (pStmt)) != SQLITE_ROW){
+			printf ("Error sqlite3_step () in touchatag_taglist_sqlite3_counter_tag ()\n");
+			return -1;
+		}
+
+		/* Saving data */
+		sprintf (list->uid, "%s", sqlite3_column_text (pStmt, 0));
+		sprintf (list->action, "%s", sqlite3_column_text (pStmt, 2));
+		list->cont = sqlite3_column_int (pStmt, 3);
+		list->num = sqlite3_column_int (pStmt, 4);
+
+		i = sqlite3_clear_bindings (pStmt);   
+				
+		if ((rc = sqlite3_reset (pStmt)) != SQLITE_OK){
+			printf ("Error sqlite3_reset () in touchatag_taglist_sqlite3_counter_tag ()\n");
+			sqlite3_close (database);
+			return -1;
+		}
+		sqlite3_close (database); 
+	}
 	return 1;
 }
 
@@ -657,28 +846,25 @@ touchatag_taglist_sqlite3_save_all (list_t *lists)
 int
 touchatag_taglist_sqlite3_number_rows ()
 {
+	sqlite3 *database;
 	char **result;
 	char *zErrMsg = 0;
 	int nrow;
  	int ncol;
 	int i, rc;
- 		
+	
 	if ((rc = sqlite3_open (dbname, &database)) != SQLITE_OK){
 		printf ("Error sqlite3_open ()\n");
 		sqlite3_close (database); 
 		return -1;
 	}
+	
 	rc = sqlite3_get_table (database,"SELECT * from tag", &result, &nrow, &ncol, &zErrMsg);
 	
   	sqlite3_free_table (result);
-  
-	if ((rc = sqlite3_reset (pStmt)) != SQLITE_OK){
-		printf ("Error sqlite3_reset ()\n");
-		sqlite3_close (database);
-		return -1;
-	}
-
+	
 	sqlite3_close (database);
+	
 	return nrow;
 }
 
@@ -686,10 +872,10 @@ touchatag_taglist_sqlite3_number_rows ()
 /* 
  * TOUCHATAG_execute   versione in prova (con una parte tratta da un esempio trovato in rete)      
 */
-
-
 int touchatag_taglist_execute_action (tag_t *tag)
 {
+	sqlite3_stmt *pStmt;   
+	sqlite3 *database;
 	int q,i=0;
 	char action[100];
 	char d[] = " ";
@@ -761,5 +947,4 @@ touchatag_sconvert (tag_t *tag, char *dest1, char *dest2)
  		dest2[2*i+1] = a[z-1];
 		i++;
 	}
-	printf ("I: %d\n", i);
 }

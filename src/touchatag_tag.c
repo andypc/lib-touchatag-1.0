@@ -82,7 +82,7 @@ char
 {
 	char *string;
 	char a[10];
-	int i, z, j;
+	int i, z;
 
 	string = (char *) malloc (48 * 2);
 	
@@ -92,10 +92,9 @@ char
 		string[2*i+1] = a[z-1];
 	}
 	string[2*i] = '\0';
-	
+
 	return strdup (string);
 }
-
 
 /*
  Prints tag ASCII DATA (all the memory)
@@ -197,7 +196,7 @@ char
 	string = (char *) malloc (UID_TAG_SIZE * 2);
 
 	for (i = 0; i < 7; i++) {
-		z = sprintf (a, "%02X", tag->UID[i]);	
+		z = sprintf (a, "%02x", tag->UID[i]);	
 		
 		string[2*i] = a[z-2];
 		string[2*i+1] = a[z-1];

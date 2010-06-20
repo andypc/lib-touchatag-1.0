@@ -13,7 +13,7 @@
 /*
  /struct Struct created to simplify reading operations from the database
  */ 
-struct list_s{
+struct list_s {
 	char uid[14];             ///< Unique tag identification number (7 bytes -> 14 char)
 	char data[48];            ///< Read/Write memory data (48 bytes - 96 char)
 	char action[MAX_ACTION];  ///< Action used by the touchatag_taglist_execute_action ()
