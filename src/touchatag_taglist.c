@@ -24,6 +24,7 @@
 #include <stdio.h>                 
 #include <sqlite3.h>        
 #include <string.h>
+#include <unistd.h>
 #include "touchatag_tag.h"					 
 #include "touchatag_taglist.h"
 
@@ -872,52 +873,57 @@ touchatag_taglist_sqlite3_number_rows ()
 /* 
  * TOUCHATAG_execute   versione in prova (con una parte tratta da un esempio trovato in rete)      
 */
-int touchatag_taglist_execute_action (tag_t *tag)
+int touchatag_taglist_execute_action (tag_t *tag, char *user)
 {
-	sqlite3_stmt *pStmt;   
-	sqlite3 *database;
-	int q,i=0;
+	int q, i=0;
 	char action[100];
 	char d[] = " ";
 	char *args[MAX_ARGS];
-    pid_t pid;
-    
-    q = touchatag_taglist_sqlite3_copy_action (tag, action);
-    if (q == -1) {
-    	printf("\nError touchatag_taglist_sqlite3_copy_action () in touchatag_taglist_execute_action ()\n");
-    	return -1;
-    }
-    
-    if (q == 0) {
-    	return 0;
-    }
-       	
-	args[0] = strtok( action, d);
-	while((args[i] != NULL) || (i < MAX_ARGS)) {
-    	i++;
-   		args[i] = strtok (NULL, d );
+	char *env[1];
+	pid_t pid;
+
+	/* Get action */
+	q = touchatag_taglist_sqlite3_copy_action (tag, action);
+
+	/* Look for errors */
+	if (q == -1) {
+		printf ("Error touchatag_taglist_sqlite3_copy_action () in touchatag_taglist_execute_action ()\n");
+		return -1;
 	}
-    
-    pid = fork ();
-    if (pid == 0)
-    {
-        /*---- figlio ----*/
+	else if (q == 0) {
+		printf ("Tag not in the DB\n");
+		return 0;
+	}
+       	
+	args[0] = strtok (action, d);
+	printf ("args[0]: %s\n", args[0]);
+	
+	while((args[i] != NULL) || (i < MAX_ARGS)) {
+		i++;
+		args[i] = strtok (NULL, d);
+		printf ("args[%d]: %s\n", i, args[i]);
+	}
+
+	env[0] = user;
+	env[1] = NULL;
+	printf ("env[1]: %s\n", env[1]);
+	printf ("user: %s\n", user);
+
+	pid = fork ();
+	
+	if (pid == 0) {
+        /* Son */
         int ret;
 
         ret = execvp (args[0], args);
-        if (ret == -1)
-            perror ("execvp");
+	    if (ret == -1)
+	        perror ("execvp");
+		
     }
-    else if (pid != -1)
-    {
-        /*---- padre ----*/
-        int status;
-        waitpid (pid, &status, 0);    
-    }
-    else
-        printf ("\nProblem with the fork\n");
+    else if (pid == -1)
+		printf (" Error fork ()\n");
 
-    return 0;
+	return 0;
 }
 
 

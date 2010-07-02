@@ -8,14 +8,14 @@
 #include <stdlib.h>
 #include <sqlite3.h>
 
-#define MAX_ACTION 30
-
+#define MAX_ACTION 101
+#define MAX_DATA 101
 /*
  /struct Struct created to simplify reading operations from the database
  */ 
 struct list_s {
 	char uid[14];             ///< Unique tag identification number (7 bytes -> 14 char)
-	char data[48];            ///< Read/Write memory data (48 bytes - 96 char)
+	char data[MAX_DATA];            ///< Read/Write memory data (48 bytes - 96 char)
 	char action[MAX_ACTION];  ///< Action used by the touchatag_taglist_execute_action ()
 	int cont;                 ///< Integer used to count how many times the tag is used in any operation
 	int num;                  ///< Unique autoincrementant key of the table
@@ -54,15 +54,25 @@ int touchatag_sqlite3_add (tag_t *tag, char *act);
  */ 
 int touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act);
 
-/** \brief Searches in the table a row with the given tag's uid
+/** \brief Searches in the table a row with the given tag's uid (struct)
  *
- * This function looks for the given tag into the database.
+ * This function looks for the given tag (struct) into the database.
  * 
  * Returns 1 if the tag UID is found.
  * Returns 0 if the tag UID is NOT found.
  * Returns -1 in event of errors
- */ 
+ */
 int touchatag_touchatag_sqlite3_search (tag_t *tag);
+
+/** \brief Searches in the table a row with the given tag's uid (as char*)
+ *
+ * This function looks for the given tag (as char *) into the database.
+ * 
+ * Returns 1 if the tag UID is found.
+ * Returns 0 if the tag UID is NOT found.
+ * Returns -1 in event of errors
+ */
+int touchatag_taglist_sqlite3_search_from_uid (char *tag_uid);
 
 /** \brief Increments the value of the CONT section refered to the given tag (if the tag UID is in the DB)
  * 
@@ -92,6 +102,16 @@ int touchatag_taglist_sqlite3_counter_tag (tag_t *tag);
  * Returns -1 in case of errors.
  */
 int touchatag_taglist_sqlite3_delete_tag (tag_t *tag);
+
+/** \brief Deletes a row of the table
+ * 
+ * This function deletes the row with the UID of the given char data.
+ * 
+ * Returns 1 if the tag UID is found and the row is deleted.
+ * Returns 0 if the tag UID is NOT found.
+ * Returns -1 in case of errors.
+ */
+int touchatag_taglist_sqlite3_delete_tag_from_uid (char *tag_uid);
 
 /** \brief Deletes the entire content of the table
  * 
@@ -145,13 +165,18 @@ int touchatag_taglist_sqlite3_number_rows ();
  * Returns 1 if everything is done.
  * Returns -1 in event of errors.
  */
-int touchatag_taglist_execute_action (tag_t *tag);
+int touchatag_taglist_execute_action (tag_t *tag, char *user);
 
+/** \brief Saves tag's data in the given struct
+ * 
+ * This function saves in the given struct all the data belonging to the tag_uid given.
+ */ 
+int touchatag_taglist_sqlite3_save_info_tag (char *tag_uid, list_t *list);
 
 /** \brief Internal function
  * 
  * This function generates from 1 hexadecimal character, 2 equivalent chars.
  */
-void touchatag_sconvert(tag_t *tag, char *dest1, char *dest2);
+void touchatag_sconvert (tag_t *tag, char *dest1, char *dest2);
 
 #endif /*TOUCHATAG_TAGLIST_H_*/
