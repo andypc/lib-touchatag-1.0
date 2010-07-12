@@ -69,51 +69,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00029"></a>00029 <span class="preprocessor"></span><span class="preprocessor">#define TOUCHATAG_TAG_H_</span>
 <a name="l00030"></a>00030 <span class="preprocessor"></span>
 <a name="l00031"></a>00031 <span class="preprocessor">#define UID_TAG_SIZE 7</span>
-<a name="l00032"></a>00032 <span class="preprocessor"></span>
-<a name="l00033"></a>00033 <span class="comment">/* </span>
-<a name="l00034"></a>00034 <span class="comment"> /struct Struct containing tag&#39;s attributes</span>
-<a name="l00035"></a>00035 <span class="comment">*/</span>
-<a name="l00036"></a><a class="code" href="structtag__s.html">00036</a> <span class="keyword">struct </span><a class="code" href="structtag__s.html">tag_s</a>{
-<a name="l00037"></a><a class="code" href="structtag__s.html#ac51bde8610372111a7b920d504313e6f">00037</a>         <span class="keywordtype">char</span> <a class="code" href="structtag__s.html#ac51bde8610372111a7b920d504313e6f" title="Unique tag identification number (7 bytes).">UID</a>[UID_TAG_SIZE];    
-<a name="l00038"></a><a class="code" href="structtag__s.html#a08370dba85049ffd3b37fd1156c3c6ed">00038</a>         <span class="keywordtype">char</span> <a class="code" href="structtag__s.html#a08370dba85049ffd3b37fd1156c3c6ed" title="Data bytes (64 bytes).">data</a>[64];             
-<a name="l00039"></a>00039 };
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structtag__s.html">tag_s</a> <a class="code" href="structtag__s.html">tag_t</a>;
-<a name="l00042"></a>00042 
-<a name="l00047"></a>00047 <span class="keywordtype">void</span> touchatag_tag_print_tag_uid (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00048"></a>00048 
-<a name="l00053"></a>00053 <span class="keywordtype">void</span> touchatag_tag_print_touchatag_link (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00054"></a>00054 
-<a name="l00059"></a>00059 <span class="keywordtype">void</span> touchatag_tag_print_hex_lbytes (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00060"></a>00060 
-<a name="l00065"></a>00065 <span class="keywordtype">void</span> touchatag_tag_print_ascii_lbytes (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00066"></a>00066 
-<a name="l00071"></a>00071 <span class="keywordtype">void</span> touchatag_tag_print_hex_data_otp (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00072"></a>00072 
-<a name="l00077"></a>00077 <span class="keywordtype">void</span> touchatag_tag_print_otps (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00078"></a>00078 
-<a name="l00083"></a>00083 <span class="keywordtype">void</span> touchatag_tag_print_hex_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00084"></a>00084 
-<a name="l00089"></a>00089 <span class="keywordtype">void</span> touchatag_tag_print_ascii_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00090"></a>00090 
-<a name="l00095"></a>00095 <span class="keywordtype">void</span> touchatag_tag_print_hex_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00096"></a>00096 
-<a name="l00101"></a>00101 <span class="keywordtype">void</span> touchatag_tag_print_ascii_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00102"></a>00102 
-<a name="l00107"></a>00107 <span class="keywordtype">char</span> *<a class="code" href="touchatag__tag_8h.html#afd813f15f1cf788e8cfbc5573d8a23bf" title="Returns tag UID.">touchatag_taglist_return_tag_uid</a> (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00108"></a>00108 
-<a name="l00113"></a>00113 <span class="keywordtype">char</span> *touchatag_tag_return_hex_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00114"></a>00114 
-<a name="l00119"></a>00119 <span class="keywordtype">char</span> *touchatag_tag_return_hex_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00120"></a>00120 
-<a name="l00125"></a>00125 <span class="keywordtype">char</span> *touchatag_tag_return_ascii_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00126"></a>00126 
-<a name="l00131"></a>00131 <span class="comment">/* Returns the link written in the touchatag tag */</span>
-<a name="l00132"></a>00132 <span class="keywordtype">char</span> *touchatag_tag_return_touchatag_link (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00133"></a>00133 
-<a name="l00138"></a>00138 <span class="keywordtype">char</span> *touchatag_tag_return_tag_uid (<a class="code" href="structtag__s.html">tag_t</a> *tag);
-<a name="l00139"></a>00139 
-<a name="l00140"></a>00140 <span class="preprocessor">#endif </span><span class="comment">/*TOUCHATAG_TAG_H_*/</span>
+<a name="l00032"></a>00032 <span class="preprocessor"></span><span class="preprocessor">#define DATA_TAG_SIZE 64</span>
+<a name="l00033"></a>00033 <span class="preprocessor"></span>
+<a name="l00034"></a>00034 <span class="comment">/* </span>
+<a name="l00035"></a>00035 <span class="comment"> /struct Struct containing tag&#39;s attributes</span>
+<a name="l00036"></a>00036 <span class="comment">*/</span>
+<a name="l00037"></a><a class="code" href="structtag__s.html">00037</a> <span class="keyword">struct </span><a class="code" href="structtag__s.html">tag_s</a>{
+<a name="l00038"></a><a class="code" href="structtag__s.html#aa881d3a2d827a7617d7069e563c04751">00038</a>         <span class="keywordtype">char</span> <a class="code" href="structtag__s.html#aa881d3a2d827a7617d7069e563c04751" title="Unique tag identification number (7 bytes).">uid</a>[UID_TAG_SIZE];    
+<a name="l00039"></a><a class="code" href="structtag__s.html#a14f83ab1feeea67c0ba38f260b21e115">00039</a>         <span class="keywordtype">char</span> <a class="code" href="structtag__s.html#a14f83ab1feeea67c0ba38f260b21e115" title="Data bytes (64 bytes).">data</a>[DATA_TAG_SIZE];  
+<a name="l00040"></a>00040 };
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structtag__s.html">tag_s</a> <a class="code" href="structtag__s.html">tag_t</a>;
+<a name="l00043"></a>00043 
+<a name="l00048"></a>00048 <span class="keywordtype">void</span> touchatag_tag_print_tag_uid (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00049"></a>00049 
+<a name="l00054"></a>00054 <span class="keywordtype">void</span> touchatag_tag_print_touchatag_link (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00055"></a>00055 
+<a name="l00060"></a>00060 <span class="keywordtype">void</span> touchatag_tag_print_hex_lbytes (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00061"></a>00061 
+<a name="l00066"></a>00066 <span class="keywordtype">void</span> touchatag_tag_print_lbits (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00067"></a>00067 
+<a name="l00072"></a>00072 <span class="keywordtype">void</span> touchatag_tag_print_hex_data_otp (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00073"></a>00073 
+<a name="l00078"></a>00078 <span class="keywordtype">void</span> touchatag_tag_print_otps (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00079"></a>00079 
+<a name="l00084"></a>00084 <span class="keywordtype">void</span> touchatag_tag_print_hex_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00085"></a>00085 
+<a name="l00090"></a>00090 <span class="keywordtype">void</span> touchatag_tag_print_ascii_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00091"></a>00091 
+<a name="l00096"></a>00096 <span class="keywordtype">void</span> touchatag_tag_print_hex_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00097"></a>00097 
+<a name="l00102"></a>00102 <span class="keywordtype">void</span> touchatag_tag_print_ascii_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00103"></a>00103 
+<a name="l00108"></a>00108 <span class="keywordtype">char</span> *<a class="code" href="touchatag__tag_8h.html#afd813f15f1cf788e8cfbc5573d8a23bf" title="Returns tag UID.">touchatag_taglist_return_tag_uid</a> (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00109"></a>00109 
+<a name="l00114"></a>00114 <span class="keywordtype">char</span> *touchatag_tag_return_hex_all_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00115"></a>00115 
+<a name="l00120"></a>00120 <span class="keywordtype">char</span> *touchatag_tag_return_hex_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00121"></a>00121 
+<a name="l00126"></a>00126 <span class="keywordtype">char</span> *touchatag_tag_return_ascii_data_mem (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00127"></a>00127 
+<a name="l00132"></a>00132 <span class="comment">/* Returns the link written in the touchatag tag */</span>
+<a name="l00133"></a>00133 <span class="keywordtype">char</span> *touchatag_tag_return_touchatag_link (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00134"></a>00134 
+<a name="l00139"></a>00139 <span class="keywordtype">char</span> *touchatag_tag_return_tag_uid (<a class="code" href="structtag__s.html">tag_t</a> *tag);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141 <span class="preprocessor">#endif </span><span class="comment">/*TOUCHATAG_TAG_H_*/</span>
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -129,7 +130,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jul 2 11:03:35 2010 for LibTouchatag by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jul 13 01:28:52 2010 for LibTouchatag by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

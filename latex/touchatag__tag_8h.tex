@@ -19,6 +19,11 @@ struct \hyperlink{structtag__s}{tag\_\-s}
 \#define {\bfseries UID\_\-TAG\_\-SIZE}~7}
 \label{touchatag__tag_8h_a0ff680614e795d6ac694b971446806cf}
 
+\item 
+\hypertarget{touchatag__tag_8h_a69394d83189a717ae839f5f3a50f04b2}{
+\#define {\bfseries DATA\_\-TAG\_\-SIZE}~64}
+\label{touchatag__tag_8h_a69394d83189a717ae839f5f3a50f04b2}
+
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -37,7 +42,7 @@ void \hyperlink{touchatag__tag_8h_ab97a0b7db43ca01779115f8dfd746994}{touchatag\_
 \begin{DoxyCompactList}\small\item\em Prints touchatag tag link. \item\end{DoxyCompactList}\item 
 void \hyperlink{touchatag__tag_8h_af9230deffc9b0a89745685e79f743bd6}{touchatag\_\-tag\_\-print\_\-hex\_\-lbytes} (\hyperlink{structtag__s}{tag\_\-t} $\ast$tag)
 \begin{DoxyCompactList}\small\item\em Prints in hexadecimal characters the values of the two locking bytes. \item\end{DoxyCompactList}\item 
-void \hyperlink{touchatag__tag_8h_a205628ed10bb8067a4df24a20982fabd}{touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes} (\hyperlink{structtag__s}{tag\_\-t} $\ast$tag)
+void \hyperlink{touchatag__tag_8h_a28b5b9c40fbad7648d53314a026a3d96}{touchatag\_\-tag\_\-print\_\-lbits} (\hyperlink{structtag__s}{tag\_\-t} $\ast$tag)
 \begin{DoxyCompactList}\small\item\em Prints the values of the 16 locking bits. \item\end{DoxyCompactList}\item 
 void \hyperlink{touchatag__tag_8h_aba05f772be62e20a4b1537de2da2daed}{touchatag\_\-tag\_\-print\_\-hex\_\-data\_\-otp} (\hyperlink{structtag__s}{tag\_\-t} $\ast$tag)
 \begin{DoxyCompactList}\small\item\em Prints in hexadecimal characters the data in tag's otp memory (page 4). \item\end{DoxyCompactList}\item 
@@ -87,16 +92,7 @@ This function prints in char format every data in tag's memory. \hypertarget{tou
 
 Prints in char format the data in tag's Read/Write memory (from page 5 to page 16). 
 
-This function prints in char format the data in tag's Read/Write memory (from page 5 to page 16). \hypertarget{touchatag__tag_8h_a205628ed10bb8067a4df24a20982fabd}{
-\index{touchatag\_\-tag.h@{touchatag\_\-tag.h}!touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes@{touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes}}
-\index{touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes@{touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes}!touchatag_tag.h@{touchatag\_\-tag.h}}
-\subsubsection[{touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes}]{\setlength{\rightskip}{0pt plus 5cm}void touchatag\_\-tag\_\-print\_\-ascii\_\-lbytes ({\bf tag\_\-t} $\ast$ {\em tag})}}
-\label{touchatag__tag_8h_a205628ed10bb8067a4df24a20982fabd}
-
-
-Prints the values of the 16 locking bits. 
-
-This function prints the values of the 16 locking bits of the given tag. \hypertarget{touchatag__tag_8h_a416f10017247fd99512740e7dddc3c63}{
+This function prints in char format the data in tag's Read/Write memory (from page 5 to page 16). \hypertarget{touchatag__tag_8h_a416f10017247fd99512740e7dddc3c63}{
 \index{touchatag\_\-tag.h@{touchatag\_\-tag.h}!touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem@{touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem}}
 \index{touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem@{touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem}!touchatag_tag.h@{touchatag\_\-tag.h}}
 \subsubsection[{touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem}]{\setlength{\rightskip}{0pt plus 5cm}void touchatag\_\-tag\_\-print\_\-hex\_\-all\_\-data\_\-mem ({\bf tag\_\-t} $\ast$ {\em tag})}}
@@ -132,7 +128,16 @@ This function prints in hexadecimal characters the data in tag's otp memory (pag
 
 Prints in hexadecimal characters the values of the two locking bytes. 
 
-This function prints in hexadecimal characters the values of the two locking bytes of the given tag. \hypertarget{touchatag__tag_8h_a8c66bb194f2d8782ab54ebdd11f69064}{
+This function prints in hexadecimal characters the values of the two locking bytes of the given tag. \hypertarget{touchatag__tag_8h_a28b5b9c40fbad7648d53314a026a3d96}{
+\index{touchatag\_\-tag.h@{touchatag\_\-tag.h}!touchatag\_\-tag\_\-print\_\-lbits@{touchatag\_\-tag\_\-print\_\-lbits}}
+\index{touchatag\_\-tag\_\-print\_\-lbits@{touchatag\_\-tag\_\-print\_\-lbits}!touchatag_tag.h@{touchatag\_\-tag.h}}
+\subsubsection[{touchatag\_\-tag\_\-print\_\-lbits}]{\setlength{\rightskip}{0pt plus 5cm}void touchatag\_\-tag\_\-print\_\-lbits ({\bf tag\_\-t} $\ast$ {\em tag})}}
+\label{touchatag__tag_8h_a28b5b9c40fbad7648d53314a026a3d96}
+
+
+Prints the values of the 16 locking bits. 
+
+This function prints the values of the 16 locking bits of the given tag. \hypertarget{touchatag__tag_8h_a8c66bb194f2d8782ab54ebdd11f69064}{
 \index{touchatag\_\-tag.h@{touchatag\_\-tag.h}!touchatag\_\-tag\_\-print\_\-otps@{touchatag\_\-tag\_\-print\_\-otps}}
 \index{touchatag\_\-tag\_\-print\_\-otps@{touchatag\_\-tag\_\-print\_\-otps}!touchatag_tag.h@{touchatag\_\-tag.h}}
 \subsubsection[{touchatag\_\-tag\_\-print\_\-otps}]{\setlength{\rightskip}{0pt plus 5cm}void touchatag\_\-tag\_\-print\_\-otps ({\bf tag\_\-t} $\ast$ {\em tag})}}

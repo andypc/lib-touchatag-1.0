@@ -56,18 +56,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2>Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlist__s.html">list_s</a></td></tr>
 <tr><td colspan="2"><h2>Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa11f843f8053c7ed6b69dae548e8cc83"></a><!-- doxytag: member="touchatag_taglist.h::MAX_ACTION" ref="aa11f843f8053c7ed6b69dae548e8cc83" args="" -->
-#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>MAX_ACTION</b>&nbsp;&nbsp;&nbsp;101</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf06a3762adb0aa04b8a5f8f016ca5e9"></a><!-- doxytag: member="touchatag_taglist.h::MAX_DATA" ref="aaf06a3762adb0aa04b8a5f8f016ca5e9" args="" -->
-#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>MAX_DATA</b>&nbsp;&nbsp;&nbsp;101</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6c61d6ae0dc638a75e9e55bd88bdfef"></a><!-- doxytag: member="touchatag_taglist.h::TAGLIST_ACTION_SIZE" ref="ad6c61d6ae0dc638a75e9e55bd88bdfef" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>TAGLIST_ACTION_SIZE</b>&nbsp;&nbsp;&nbsp;101</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a97c843251d4d3b37b00d4b158c016f"></a><!-- doxytag: member="touchatag_taglist.h::TAGLIST_DATA_SIZE" ref="a7a97c843251d4d3b37b00d4b158c016f" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>TAGLIST_DATA_SIZE</b>&nbsp;&nbsp;&nbsp;101</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a504002a05e68329ac3d74c8c94176d82"></a><!-- doxytag: member="touchatag_taglist.h::TAGLIST_UID_SIZE" ref="a504002a05e68329ac3d74c8c94176d82" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>TAGLIST_UID_SIZE</b>&nbsp;&nbsp;&nbsp;14</td></tr>
 <tr><td colspan="2"><h2>Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b55f1cd33b93f9cc32dbe31f95e22ed"></a><!-- doxytag: member="touchatag_taglist.h::list_t" ref="a3b55f1cd33b93f9cc32dbe31f95e22ed" args="" -->
 typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>list_t</b></td></tr>
 <tr><td colspan="2"><h2>Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a79beb2ddb992a7eed0b9fa115ddea1c0">touchatag_taglist_sqlite3_init</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Creates the database.  <a href="#a79beb2ddb992a7eed0b9fa115ddea1c0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a814fece00ed2e00be5a94dcaa9d99ad8">touchatag_sqlite3_add</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *act)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds tag's data to a new row in the database table.  <a href="#a814fece00ed2e00be5a94dcaa9d99ad8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a04c7320a7d12b83c253f19a9ac2f08ee">touchatag_taglist_sqlite3_add</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *act)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds tag's data to a new row in the database table.  <a href="#a04c7320a7d12b83c253f19a9ac2f08ee"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a2920621eaf89de789db558aec7d7320f">touchatag_taglist_sqlite3_action_update</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *act)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Allocates a new action linked to the tag given This function uses attributes of the given tag structure and the array pointed to act to change the action linked to a tag with another contained in act.  <a href="#a2920621eaf89de789db558aec7d7320f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a136950d7a2b28f970cc2ead7345ad3e8">touchatag_touchatag_sqlite3_search</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
@@ -76,8 +78,8 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Searches in the table a row with the given tag's uid (as char*).  <a href="#a35b3942d395771214317f2cc878d2abe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#ae0d1484dd03e0a3294e40f16fe5ea39a">touchatag_taglist_sqlite3_update_counter_tag</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Increments the value of the CONT section refered to the given tag (if the tag UID is in the DB).  <a href="#ae0d1484dd03e0a3294e40f16fe5ea39a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a02ab93bc4ae7b54edbe4319fff0c9b08">touchatag_taglist_sqlite3_counter_tag</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the value of CONT.  <a href="#a02ab93bc4ae7b54edbe4319fff0c9b08"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#adaa5b5d4a3b510b2f852f7508796eacc">touchatag_taglist_sqlite3_return_counter_tag</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the value of CONT.  <a href="#adaa5b5d4a3b510b2f852f7508796eacc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a99725d9f25afd1514845fa106f1eacdc">touchatag_taglist_sqlite3_delete_tag</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Deletes a row of the table.  <a href="#a99725d9f25afd1514845fa106f1eacdc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a26d4669179406dcb44e85b0e10524bce">touchatag_taglist_sqlite3_delete_tag_from_uid</a> (char *tag_uid)</td></tr>
@@ -92,8 +94,8 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Copies every rows of the table in a list_t type's array.  <a href="#ab4b458a5f921032d2b44e09d7073b893"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#aeabb58d026e0cfc22aa2a0b95792d03e">touchatag_taglist_sqlite3_number_rows</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns how many rows are saved in the table.  <a href="#aeabb58d026e0cfc22aa2a0b95792d03e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a9d10d201efa7753fd722c5f39d30d2f1">touchatag_taglist_execute_action</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *user)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Executes the tag "action".  <a href="#a9d10d201efa7753fd722c5f39d30d2f1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#aac48ed1481a72bc5181da74acbedfc5f">touchatag_taglist_execute_action0</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *user)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Executes the tag "action".  <a href="#aac48ed1481a72bc5181da74acbedfc5f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#a37ced951f499c2fce34520e667f22e77">touchatag_taglist_sqlite3_save_info_tag</a> (char *tag_uid, <a class="el" href="structlist__s.html">list_t</a> *list)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Saves tag's data in the given struct.  <a href="#a37ced951f499c2fce34520e667f22e77"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__taglist_8h.html#ac45f54054960f14a49aa1178cb09fa7f">touchatag_sconvert</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag, char *dest1, char *dest2)</td></tr>
@@ -138,43 +140,12 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 
 </div>
 </div>
-<a class="anchor" id="a814fece00ed2e00be5a94dcaa9d99ad8"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_sqlite3_add" ref="a814fece00ed2e00be5a94dcaa9d99ad8" args="(tag_t *tag, char *act)" -->
+<a class="anchor" id="aac48ed1481a72bc5181da74acbedfc5f"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_taglist_execute_action0" ref="aac48ed1481a72bc5181da74acbedfc5f" args="(tag_t *tag, char *user)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int touchatag_sqlite3_add </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>tag</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&nbsp;</td>
-          <td class="paramname"> <em>act</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Adds tag's data to a new row in the database table. </p>
-<p>This function uses attributes of the given tag's structure and the array pointed by act to add a row to the table</p>
-<p>Returns 1 if the row has been added. Returns 0 a row with the same uid already exist (in this case the function does nothing). Returns -1 in event of errors. </p>
-
-</div>
-</div>
-<a class="anchor" id="a9d10d201efa7753fd722c5f39d30d2f1"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_taglist_execute_action" ref="a9d10d201efa7753fd722c5f39d30d2f1" args="(tag_t *tag, char *user)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int touchatag_taglist_execute_action </td>
+          <td class="memname">int touchatag_taglist_execute_action0 </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
           <td class="paramname"> <em>tag</em>, </td>
@@ -226,7 +197,38 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 <div class="memdoc">
 
 <p>Allocates a new action linked to the tag given This function uses attributes of the given tag structure and the array pointed to act to change the action linked to a tag with another contained in act. </p>
-<p>Returns 1 if the row has been added. Returns 0 a row with the same uid already existed (in this case the function does nothing); Returns -1 in event of errors </p>
+<p>Returns 1 if the row has been added. Returns -1 in event of errors </p>
+
+</div>
+</div>
+<a class="anchor" id="a04c7320a7d12b83c253f19a9ac2f08ee"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_taglist_sqlite3_add" ref="a04c7320a7d12b83c253f19a9ac2f08ee" args="(tag_t *tag, char *act)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int touchatag_taglist_sqlite3_add </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>tag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramname"> <em>act</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Adds tag's data to a new row in the database table. </p>
+<p>This function uses attributes of the given tag's structure and the array pointed by act to add a row to the table</p>
+<p>Returns 1 if the row has been added. Returns 0 a row with the same uid already exist (in this case the function does nothing). Returns -1 in event of errors. </p>
 
 </div>
 </div>
@@ -258,28 +260,6 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 <p>Copies the action's value of a row into the given array. </p>
 <p>This function copies into the given array the action's value of the row with the given tag UID.</p>
 <p>Returns 1 if the tag UID is found and the action copied. Returns 0 if the tag UID is NOT found. Returns -1 in event of errors. </p>
-
-</div>
-</div>
-<a class="anchor" id="a02ab93bc4ae7b54edbe4319fff0c9b08"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_taglist_sqlite3_counter_tag" ref="a02ab93bc4ae7b54edbe4319fff0c9b08" args="(tag_t *tag)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int touchatag_taglist_sqlite3_counter_tag </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>tag</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Returns the value of CONT. </p>
-<p>This function returns the count value of the the given tag.</p>
-<p>Returns -2 if the tag UID is NOT found. Returns -1 in event of errors </p>
 
 </div>
 </div>
@@ -387,6 +367,28 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 <p>Deletes the entire content of the table. </p>
 <p>This function deletes the entire content of the table but not the table itself.</p>
 <p>Returns 1 if everything is done. Returns -1 in event of errors. </p>
+
+</div>
+</div>
+<a class="anchor" id="adaa5b5d4a3b510b2f852f7508796eacc"></a><!-- doxytag: member="touchatag_taglist.h::touchatag_taglist_sqlite3_return_counter_tag" ref="adaa5b5d4a3b510b2f852f7508796eacc" args="(tag_t *tag)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int touchatag_taglist_sqlite3_return_counter_tag </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>tag</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns the value of CONT. </p>
+<p>This function returns the count value of the the given tag.</p>
+<p>Returns -2 if the tag UID is NOT found. Returns -1 in event of errors </p>
 
 </div>
 </div>
@@ -544,7 +546,7 @@ typedef struct <a class="el" href="structlist__s.html">list_s</a>&nbsp;</td><td 
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jul 2 11:03:35 2010 for LibTouchatag by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jul 13 01:28:52 2010 for LibTouchatag by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

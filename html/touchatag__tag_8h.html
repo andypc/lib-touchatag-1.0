@@ -54,6 +54,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2>Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ff680614e795d6ac694b971446806cf"></a><!-- doxytag: member="touchatag_tag.h::UID_TAG_SIZE" ref="a0ff680614e795d6ac694b971446806cf" args="" -->
 #define&nbsp;</td><td class="memItemRight" valign="bottom"><b>UID_TAG_SIZE</b>&nbsp;&nbsp;&nbsp;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69394d83189a717ae839f5f3a50f04b2"></a><!-- doxytag: member="touchatag_tag.h::DATA_TAG_SIZE" ref="a69394d83189a717ae839f5f3a50f04b2" args="" -->
+#define&nbsp;</td><td class="memItemRight" valign="bottom"><b>DATA_TAG_SIZE</b>&nbsp;&nbsp;&nbsp;64</td></tr>
 <tr><td colspan="2"><h2>Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e448e9ab83c69c6a6d4a54035c93edd"></a><!-- doxytag: member="touchatag_tag.h::tag_t" ref="a2e448e9ab83c69c6a6d4a54035c93edd" args="" -->
 typedef struct <a class="el" href="structtag__s.html">tag_s</a>&nbsp;</td><td class="memItemRight" valign="bottom"><b>tag_t</b></td></tr>
@@ -64,8 +66,8 @@ typedef struct <a class="el" href="structtag__s.html">tag_s</a>&nbsp;</td><td cl
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints touchatag tag link.  <a href="#ab97a0b7db43ca01779115f8dfd746994"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__tag_8h.html#af9230deffc9b0a89745685e79f743bd6">touchatag_tag_print_hex_lbytes</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints in hexadecimal characters the values of the two locking bytes.  <a href="#af9230deffc9b0a89745685e79f743bd6"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__tag_8h.html#a205628ed10bb8067a4df24a20982fabd">touchatag_tag_print_ascii_lbytes</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints the values of the 16 locking bits.  <a href="#a205628ed10bb8067a4df24a20982fabd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__tag_8h.html#a28b5b9c40fbad7648d53314a026a3d96">touchatag_tag_print_lbits</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints the values of the 16 locking bits.  <a href="#a28b5b9c40fbad7648d53314a026a3d96"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__tag_8h.html#aba05f772be62e20a4b1537de2da2daed">touchatag_tag_print_hex_data_otp</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prints in hexadecimal characters the data in tag's otp memory (page 4).  <a href="#aba05f772be62e20a4b1537de2da2daed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="touchatag__tag_8h.html#a8c66bb194f2d8782ab54ebdd11f69064">touchatag_tag_print_otps</a> (<a class="el" href="structtag__s.html">tag_t</a> *tag)</td></tr>
@@ -132,27 +134,6 @@ typedef struct <a class="el" href="structtag__s.html">tag_s</a>&nbsp;</td><td cl
 
 <p>Prints in char format the data in tag's Read/Write memory (from page 5 to page 16). </p>
 <p>This function prints in char format the data in tag's Read/Write memory (from page 5 to page 16). </p>
-
-</div>
-</div>
-<a class="anchor" id="a205628ed10bb8067a4df24a20982fabd"></a><!-- doxytag: member="touchatag_tag.h::touchatag_tag_print_ascii_lbytes" ref="a205628ed10bb8067a4df24a20982fabd" args="(tag_t *tag)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void touchatag_tag_print_ascii_lbytes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
-          <td class="paramname"> <em>tag</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Prints the values of the 16 locking bits. </p>
-<p>This function prints the values of the 16 locking bits of the given tag. </p>
 
 </div>
 </div>
@@ -237,6 +218,27 @@ typedef struct <a class="el" href="structtag__s.html">tag_s</a>&nbsp;</td><td cl
 
 <p>Prints in hexadecimal characters the values of the two locking bytes. </p>
 <p>This function prints in hexadecimal characters the values of the two locking bytes of the given tag. </p>
+
+</div>
+</div>
+<a class="anchor" id="a28b5b9c40fbad7648d53314a026a3d96"></a><!-- doxytag: member="touchatag_tag.h::touchatag_tag_print_lbits" ref="a28b5b9c40fbad7648d53314a026a3d96" args="(tag_t *tag)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void touchatag_tag_print_lbits </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structtag__s.html">tag_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>tag</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Prints the values of the 16 locking bits. </p>
+<p>This function prints the values of the 16 locking bits of the given tag. </p>
 
 </div>
 </div>
@@ -442,7 +444,7 @@ typedef struct <a class="el" href="structtag__s.html">tag_s</a>&nbsp;</td><td cl
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Jul 2 11:03:35 2010 for LibTouchatag by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Jul 13 01:28:52 2010 for LibTouchatag by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
