@@ -179,7 +179,7 @@ touchatag_tag_print_tag_uid (tag_t *tag)
 {
  	int i;
  	for (i=0; i<7; i++)
- 		printf("%02X ", (unsigned char) tag->UID[i]);
+ 		printf("%02X ", (unsigned char) tag->uid[i]);
 }
 
 
@@ -196,7 +196,7 @@ char
 	string = (char *) malloc (UID_TAG_SIZE * 2);
 
 	for (i = 0; i < 7; i++) {
-		z = sprintf (a, "%02x", tag->UID[i]);	
+		z = sprintf (a, "%02x", tag->uid[i]);	
 		
 		string[2*i] = a[z-2];
 		string[2*i+1] = a[z-1];
@@ -269,7 +269,7 @@ touchatag_tag_print_hex_lbytes (tag_t *tag)
  Prints ASCII LBYTES
 */
 void
-touchatag_tag_print_ascii_lbytes (tag_t *tag)
+touchatag_tag_print_lbits (tag_t *tag)
 {
 	int i,z;
 	char a[10];

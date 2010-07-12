@@ -29,13 +29,14 @@
 #define TOUCHATAG_TAG_H_
 
 #define UID_TAG_SIZE 7
+#define DATA_TAG_SIZE 64
 
 /* 
  /struct Struct containing tag's attributes
 */
 struct tag_s{
-	char UID[UID_TAG_SIZE];    ///< Unique tag identification number (7 bytes)
-	char data[64];             ///< Data bytes (64 bytes)
+	char uid[UID_TAG_SIZE];    ///< Unique tag identification number (7 bytes)
+	char data[DATA_TAG_SIZE];  ///< Data bytes (64 bytes)
 };
 
 typedef struct tag_s tag_t;
@@ -62,7 +63,7 @@ void touchatag_tag_print_hex_lbytes (tag_t *tag);
  * 
  * This function prints the values of the 16 locking bits of the given tag.
  */
-void touchatag_tag_print_ascii_lbytes (tag_t *tag);
+void touchatag_tag_print_lbits (tag_t *tag);
 
 /** \brief Prints in hexadecimal characters the data in tag's otp memory (page 4)
  * 

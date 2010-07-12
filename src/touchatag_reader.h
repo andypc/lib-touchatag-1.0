@@ -15,6 +15,7 @@
 #define ID_SAM_SIZE 6
 #define SN_SAM_SIZE 8
 #define RECV_BUF_SIZE 64
+#define NOTE_SIZE 48
 
 /* 
  \struct Struct containing reader's attributes 
@@ -32,9 +33,9 @@ struct reader_s {
  \struct Struct created to simplify writing & reading operations
 */
 struct notes_s{
-	int size;       ///< Number of bytes needed to write
-	int start;      ///< First byte it's needed to write 
-	char note[48];  ///< Values it's needed to write
+	int size;              ///< Number of bytes needed to write
+	int start;             ///< First byte it's needed to write 
+	char note[NOTE_SIZE];  ///< Values it's needed to write
 };
 
 typedef struct reader_s reader_t;

@@ -8,17 +8,20 @@
 #include <stdlib.h>
 #include <sqlite3.h>
 
-#define MAX_ACTION 101
-#define MAX_DATA 101
+#define TAGLIST_ACTION_SIZE 101
+#define TAGLIST_DATA_SIZE 101
+#define TAGLIST_UID_SIZE 14
+
+
 /*
  /struct Struct created to simplify reading operations from the database
- */ 
+ */
 struct list_s {
-	char uid[14];             ///< Unique tag identification number (7 bytes -> 14 char)
-	char data[MAX_DATA];            ///< Read/Write memory data (48 bytes - 96 char)
-	char action[MAX_ACTION];  ///< Action used by the touchatag_taglist_execute_action ()
-	int cont;                 ///< Integer used to count how many times the tag is used in any operation
-	int num;                  ///< Unique autoincrementant key of the table
+	char uid[TAGLIST_UID_SIZE];       ///< Unique tag identification number (7 bytes -> 14 char)
+	char data[TAGLIST_DATA_SIZE];     ///< Read/Write memory data (48 bytes - 96 char)
+	char action[TAGLIST_ACTION_SIZE]; ///< Action used by the touchatag_taglist_execute_action ()
+	int cont;                         ///< Integer used to count how many times the tag is used in any operation
+	int num;                          ///< Unique autoincrementant key of the table
 };
 
 typedef struct list_s list_t;
@@ -32,7 +35,7 @@ typedef struct list_s list_t;
  * Returns 0 if the table has been created.
  * Returns -1 in event of troubles or if the table already exist.
  */ 
-int touchatag_taglist_sqlite3_init();
+int touchatag_taglist_sqlite3_init ();
 
 /** \brief Adds tag's data to a new row in the database table
  * 
@@ -42,14 +45,13 @@ int touchatag_taglist_sqlite3_init();
  * Returns 0 a row with the same uid already exist (in this case the function does nothing).
  * Returns -1 in event of errors.
  */ 
-int touchatag_sqlite3_add (tag_t *tag, char *act);
+int touchatag_taglist_sqlite3_add (tag_t *tag, char *act);
 
 /** \brief Allocates a new action linked to the tag given
  * This function uses attributes of the given tag structure and the array pointed to act 
  * to change the action linked to a tag with another contained in act
  * 
  * Returns 1 if the row has been added.
- * Returns 0 a row with the same uid already existed (in this case the function does nothing);
  * Returns -1 in event of errors
  */ 
 int touchatag_taglist_sqlite3_action_update (tag_t *tag, char *act);
@@ -91,7 +93,7 @@ int touchatag_taglist_sqlite3_update_counter_tag (tag_t *tag);
  * Returns -2 if the tag UID is NOT found.
  * Returns -1 in event of errors
  */ 
-int touchatag_taglist_sqlite3_counter_tag (tag_t *tag);
+int touchatag_taglist_sqlite3_return_counter_tag (tag_t *tag);
 
 /** \brief Deletes a row of the table
  * 
@@ -165,7 +167,7 @@ int touchatag_taglist_sqlite3_number_rows ();
  * Returns 1 if everything is done.
  * Returns -1 in event of errors.
  */
-int touchatag_taglist_execute_action (tag_t *tag, char *user);
+int touchatag_taglist_execute_action0 (tag_t *tag, char *user);
 
 /** \brief Saves tag's data in the given struct
  * 

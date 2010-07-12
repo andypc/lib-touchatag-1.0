@@ -11,8 +11,8 @@
 struct libusb_s{
 	int dev_number;
 	struct usb_bus *busses;
-	struct usb_device *devices[MAX_DEV_NUMBER];
-	struct usb_dev_handle *handlers[MAX_DEV_NUMBER];
+	struct usb_device *devices [MAX_DEV_NUMBER];
+	struct usb_dev_handle *handlers [MAX_DEV_NUMBER];
 	
 };
 

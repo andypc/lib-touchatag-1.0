@@ -64,7 +64,6 @@ int touchatag_numofreader = -1;
 int
 touchatag_scan_bus (libusb_t *libusb)
 {
-	libusb_init (libusb);
 	libusb_search (libusb, idVendor, idProduct);
 	libusb_open_all (libusb);
 	return libusb->dev_number;
@@ -80,27 +79,28 @@ touchatag_reader_init_all (libusb_t *libusb, reader_t *reader)
 	int target;
 	
 	for (target = 0; target < libusb->dev_number; target++) {
-		if (touchatag_command (libusb, touchatag_power_up, sizeof (touchatag_power_up), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ){
+
+		if (touchatag_command (libusb, touchatag_power_up, sizeof (touchatag_power_up), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ) {
 			printf ("Error Power Up\n");
 			exit (EXIT_FAILURE);
 		}
 		
-		if (touchatag_command (libusb, touchatag_INIT1, sizeof (touchatag_INIT1), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ){
+		if (touchatag_command (libusb, touchatag_INIT1, sizeof (touchatag_INIT1), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ) {
 			printf ("Error INIT1\n");
 			exit (EXIT_FAILURE);
-		}		
+		}
 
-		if (touchatag_command (libusb, touchatag_INIT2, sizeof (touchatag_INIT2), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ){
+		if (touchatag_command (libusb, touchatag_INIT2, sizeof (touchatag_INIT2), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ) {
 			printf ("Error INIT2\n");
 			exit (EXIT_FAILURE);
-		}		
-
-		if (touchatag_command (libusb, touchatag_INIT3, sizeof (touchatag_INIT3), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ){
+		}
+		
+		if (touchatag_command (libusb, touchatag_INIT3, sizeof (touchatag_INIT3), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ) {
 			printf ("Error INIT3\n");
 			exit (EXIT_FAILURE);
 		}			
 
-		if (touchatag_command (libusb, touchatag_INIT4, sizeof (touchatag_INIT4), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ){
+		if (touchatag_command (libusb, touchatag_INIT4, sizeof (touchatag_INIT4), &reader[target], sizeof (reader[target].recvbuf), target) < 0 ) {
 			printf ("Error INIT4\n");
 			exit (EXIT_FAILURE);
 		}	
@@ -116,7 +116,7 @@ touchatag_command (libusb_t *libusb, char *command, int command_len, reader_t *r
 {
 	int bytes_sent;
 	int bytes_recv;
-
+	
 	/* Send command */
 	if ((bytes_sent = usb_bulk_write (libusb->handlers[target], 0x02, (char *) command, command_len, 10)) < 0 ){
 		if ((bytes_sent = usb_bulk_write (libusb->handlers[target], 0x02, (char *) command, command_len, 10)) < 0 ){
@@ -273,13 +273,13 @@ touchatag_reader_get_tag_uid (libusb_t *libusb,reader_t *reader, tag_t *tag, int
 	
 	/* Save first tag UID */
 	for (i = 0; i < 7; i++){
-		tag[0].UID[i] = reader->recvbuf[i+20];
+		tag[0].uid[i] = reader->recvbuf[i+20];
 	}
 
 	/* Save second tag UID (only if two tags are found) */
 	if (reader->recvbuf[29] = 0x02) {
 		for (i = 0; i < 7; i++) {
-			tag[1].UID[i] = reader->recvbuf[i+34];
+			tag[1].uid[i] = reader->recvbuf[i+34];
 		}
 	}
 }

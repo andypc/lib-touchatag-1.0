@@ -25,20 +25,15 @@
 
 
 void
-libusb_init (libusb_t *libusb)
-{
-	usb_init ();
-	usb_find_busses ();
-	usb_find_devices ();
-}
-
-
-void
 libusb_search (libusb_t *libusb, int idVendor, int idProduct)
 {
 	struct usb_bus *bus;
 	struct usb_device *dev;
-	
+
+	usb_init();
+	usb_find_busses();
+	usb_find_devices();
+
 	libusb->busses = usb_get_busses ();
 	libusb->dev_number = 0;
 
